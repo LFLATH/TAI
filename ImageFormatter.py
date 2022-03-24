@@ -4,6 +4,7 @@ from numpy import array #Added this line so array doesn't give an undefined erro
 import pandas
 
 numpy.set_printoptions(threshold=numpy.inf)#Sets the length at which an array is truncated, while printing, to infinity
+
 def format_Image(img):#Turned the file into a method
     simg = img.resize((64,64),resample=Image.NEAREST)#Resize the image to 64x64 pixels using the Nearest Function from PIL
     m = array(simg)#Define an array from the image
