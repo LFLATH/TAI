@@ -1,7 +1,7 @@
-import cv2
-import PIL
-import numpy as np
+from PIL import Image
+from numpy import array
 
-img = cv2.imread("C:/users/Sweet/source/repos/assets/test1.jpg")
+img = Image.open(r"C:/users/Sweet/source/repos/assets/test1.jpg")
 
-hist = np.histogram(img.flatten(),256,[0,256])[0]
+ar = array(img)
+ar
