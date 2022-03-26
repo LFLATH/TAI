@@ -35,6 +35,7 @@ for i in range(len(data)):
             s = (delta / Cmax)
         v = Cmax
         huearray[step] = h
+        print(huearray)
         step = step + 1
 bins1 = [None] * 360
 for v in range(0, 360):
@@ -42,3 +43,4 @@ for v in range(0, 360):
 plt.hist(huearray,  bins = bins1)
 plt.title("Proving Python is better")
 plt.show()
+
