@@ -3,6 +3,7 @@ from numpy import asarray
 from matplotlib import pyplot as plt
 img = Image.open('Test_Images/t1.jpg') #Loads the image
 #img = format_Image(img)#Formats the Image
+img = format_Image(img)
 data = asarray(img)#Makes image into an array of rgb values
 print(data[0][0])#Prints the data
 img.show()
