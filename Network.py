@@ -3,14 +3,13 @@ import numpy
 from HSVConverter import huearray
 from Neuron import Neuron
 
-x = huearray
+x = huearray#input
 
-hn1 = 28 # defines number of Hidden Neurons in the first hidden layer
-
-output1 = numpy.zeros((hn1))#defines 1st output array
+hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
+output1 = numpy.zeros((hn))#defines output array for the hidden layers
 step = 0
 
-for i in range(hn1):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(connects the 784 pixels to the number of hidden neurons)
+for i in range(hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
 
     weights = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the input layer
     biases = 0#sets bias for each neuron
@@ -20,14 +19,28 @@ for i in range(hn1):# applies feedforward method from neuron class to each pixel
     step = step + 1
 print(output1)#prints feedforward of each input once for each neuron in the hidden layer
 
-hn2 = 28
+step = 0 #resets step
 
-for i in range(hn2):
+for i in range(hn):
 
-    weights = numpy.random.rand(28)-.5 
+    weights = numpy.random.rand(28,)-.5 
     biases = 0
-    layer1 = Neuron(weights, biases)
-    result = layer1.feedforward(output1)
+    layer2 = Neuron(weights, biases)
+    result = layer2.feedforward(output1)
     output1[step] = result
     step = step + 1
 print(output1)
+
+fn = 2
+output = numpy.zeros((fn))
+step = 0
+
+for i in range(fn):
+
+    weights = numpy.random.rand(2,)-.5 
+    biases = 0
+    layer2 = Neuron(weights, biases)
+    result = layer2.feedforward(output)
+    output[step] = result
+    step = step + 1
+print(output)
