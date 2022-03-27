@@ -19,3 +19,15 @@ for i in range(hn1):# applies feedforward method from neuron class to each pixel
     output1[step] = result#result added to output1 array(copied from your hsv method)
     step = step + 1
 print(output1)#prints feedforward of each input once for each neuron in the hidden layer
+
+hn2 = 28
+
+for i in range(hn2):
+
+    weights = numpy.random.rand(28)-.5 
+    biases = 0
+    layer1 = Neuron(weights, biases)
+    result = layer1.feedforward(output1)
+    output1[step] = result
+    step = step + 1
+print(output1)
