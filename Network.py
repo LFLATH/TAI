@@ -1,11 +1,16 @@
 import numpy
+
 from HSVConverter import huearray
-import Neuron
+from Neuron import Neuron
 
 x = huearray
-weights = numpy.random.rand(28,28)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the first layer
-biases = numpy.zeros((28,28))#creates biases for each of the 784 neurons
 
-layer1 = Neuron(weights, biases)
+for n in range(len(x)):
+    weight1 = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the first layer
+    biases = 0 
 
-layer1.feedforward(x)
+    layer1 = Neuron(weight1, biases)
+
+    x = layer1.feedforward(x)
+
+
