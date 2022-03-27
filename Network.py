@@ -1,11 +1,25 @@
 import numpy
+import Neuron
 from HSVConverter import huearray
-import Neuron 
+    
+class Network:
 
-input = huearray
+  def __init__(self):
+    weights = numpy.random.rand(28, 28)
+    bias = 0
 
-neuron1 = Neuron
+    self.h1 = Neuron(weights, bias)
+    self.h2 = Neuron(weights, bias)
+    self.o1 = Neuron(weights, bias)
 
-for p in range(input[0].astype(int)):
-    Neuron.feedforward(neuron1, input)#youre gonna ahve to exlpain how to use classes to me agian
-    input = input + 1 #idk how to add one to the bracketed value
+  def feedforward(self, x):
+    out_h1 = self.h1.feedforward(x)
+    out_h2 = self.h2.feedforward(x)
+
+    # The inputs for o1 are the outputs from h1 and h2
+    out_o1 = self.o1.feedforward(numpy.array([out_h1, out_h2]))
+
+    return out_o1
+
+network = Network()
+network.feedforward(huearray)
