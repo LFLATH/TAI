@@ -12,5 +12,3 @@ for n in range(len(x)):
     layer1 = Neuron(weight1, biases)
 
     x = layer1.feedforward(x)
-
-
