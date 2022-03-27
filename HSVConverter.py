@@ -36,9 +36,11 @@ for i in range(len(data)):
         v = Cmax
         huearray[step] = h
         step = step + 1
-#bins1 = [None] * 360
-#for v in range(0, 360):
-#    bins1[v] = v
-#plt.hist(huearray,  bins = bins1)
-#plt.title("Proving Python is better")
-#plt.show()
+'''
+bins1 = [None] * 360
+for v in range(0, 360):
+    bins1[v] = v
+plt.hist(huearray,  bins = bins1)
+plt.title("Proving Python is better")
+plt.show()
+'''
