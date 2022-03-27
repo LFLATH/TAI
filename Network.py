@@ -5,10 +5,15 @@ from Neuron import Neuron
 
 x = huearray
 
-for n in range(len(x)):
-    weight1 = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the first layer
-    biases = 0 
+NN = 28 # number of neurons in the first hidden layer
 
-    layer1 = Neuron(weight1, biases)
+output = numpy.zeros((1,NN))
 
-    x = layer1.feedforward(x)
+for i in range(NN):
+
+    weights = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the first layer
+    biases = numpy.zeros(784)
+    layer1 = Neuron(weights, biases)
+    output = layer1.feedforward(x)
+    output[i] = output
+    
