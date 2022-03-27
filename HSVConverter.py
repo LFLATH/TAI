@@ -6,7 +6,7 @@ img = Image.open('Test_Images/t1.jpg') #Loads the image
 img = format_Image(img)
 data = asarray(img)#Makes image into an array of rgb values
 print(data[0][0])#Prints the data
-img.show()
+#img.show()
 huearray = numpy.zeros((len(data) * len(data[0])))
 step = 0
 for i in range(len(data)):
@@ -35,12 +35,10 @@ for i in range(len(data)):
             s = (delta / Cmax)
         v = Cmax
         huearray[step] = h
-        print(huearray)
         step = step + 1
-bins1 = [None] * 360
-for v in range(0, 360):
-    bins1[v] = v
-plt.hist(huearray,  bins = bins1)
-plt.title("Proving Python is better")
-plt.show()
-
+#bins1 = [None] * 360
+#for v in range(0, 360):
+#    bins1[v] = v
+#plt.hist(huearray,  bins = bins1)
+#plt.title("Proving Python is better")
+#plt.show()
