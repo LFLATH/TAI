@@ -1,5 +1,7 @@
 import numpy
+import warnings
 
+warnings.filterwarnings('ignore')
 
 def sigmoid(t):
     #We are using a sigmoid activation function

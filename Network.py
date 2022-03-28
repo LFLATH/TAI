@@ -1,11 +1,10 @@
 import numpy
 
-from HSVConverter import huearray
 from Math import sigmoid
 from Neuron import Neuron
-
-x = huearray#input
-
+#Major current problem
+#How do we put the data from pictures into the network, so that when we are intitializng the network
+#That data is the same as when we train the network.
 hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
 output1 = numpy.zeros((hn))#defines output array for the hidden layers
 sumInput = numpy.zeros((hn))
@@ -16,24 +15,21 @@ step = 0
 for i in range(hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
 
     weightsInput = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the input layer
-    biasesInput = 0#sets bias for each neuron
+    biasesInput = 0#sets bias for each neuron        
     layer1 = Neuron(weightsInput, biasesInput)#defines layer1 as class neuron with the weights and biases defined previously
     result = layer1.feedforward(x)#dot product of each pixel in the input and the random weights plus the bias
     output1[step] = result#result added to output1 array(copied from your hsv method)
     step = step + 1
-print(output1)#prints feedforward of each input once for each neuron in the hidden layer
-
 step = 0 #resets step
 
 for i in range(hn):
 
-    weightsHidden = numpy.random.rand(28,)-.5 
-    biasesHidden = 0
-    layer2 = Neuron(weightsHidden, biasesHidden)
-    result = layer2.feedforward(output1)
-    output1[step] = result
-    step = step + 1
-print(output1)
+        weightsHidden = numpy.random.rand(28,)-.5 
+        biasesHidden = 0
+        layer2 = Neuron(weightsHidden, biasesHidden)
+        result = layer2.feedforward(output1)
+        output1[step] = result
+        step = step + 1
 
 fn = 1
 output = numpy.zeros((fn))
@@ -47,7 +43,6 @@ for i in range(fn):
     result = layer2.feedforward(output)
     output[step] = result
     step = step + 1
-print(output)
 
 def train(self, data, results):
     #Data should be an array of HSV arrays
@@ -63,6 +58,7 @@ def train(self, data, results):
             #Loops through all th connections to the first hidden layer from the input neurons
             #Takes the sum of these connections times the weight
             #Takes the sigmoid of these sums
+
             for i in range(0, 29):
                 for j in range(0, 785):
                     sumInput[i] += weightsInput[j] * array[j]
@@ -75,7 +71,6 @@ def train(self, data, results):
                 for j in range(0, 29):
                     sumHidden[i] += weightsHidden[j] * array[j]
                 sumHidden[i] += biasesHidden[i]
-
             for g in  range(0, 29):
                 sumHidden[g] = sigmoid(sumHidden[g])
             #Same as above except for the output layer
@@ -84,15 +79,13 @@ def train(self, data, results):
                     sumHidden2[i] += weightsHidden2[j] * array[j]
                 sumHidden2[i] += biasesHidden2[i]
 
-            for g in  range(0, 2):
-                sumHidden2[g] = sigmoid(sumHidden2[g])
-
+            sumHidden2 = sigmoid(sumHidden2)
+            return(sumHidden2)
             #Defining y_pred
-            y_pred = sumHidden2
+            #y_pred = sumHidden2
             #Calculating partial derivative
-            partial_y_pred = -2 * (results - y_pred)
+        # partial_y_pred = -2 * (results - y_pred)
 
-            
 
 
         
