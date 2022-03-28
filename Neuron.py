@@ -1,5 +1,5 @@
 import numpy
-
+from Math import *
 class Neuron:
     def __init__(self, weights, bias): #Inits the weights and bias of the Neuron
         self.weights = weights #Sets the specific instances of bias and weights
@@ -11,8 +11,4 @@ class Neuron:
         total = numpy.dot(self.weights, inputs) + self.bias
         return sigmoid(total)
 
-def sigmoid(t):
-    #We are using a sigmoid activation function
-    #This function will compute the final value of our NN
-    return 1 / (1 + numpy.exp(-t))
 
