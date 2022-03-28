@@ -1,28 +1,46 @@
 import numpy
-from HSVConverter import makeArray
-import Neuron
-from PIL import Image
 
+from HSVConverter import huearray
+from Neuron import Neuron
 
+x = huearray#input
 
-img = Image.open('Test_Images/t1.jpg') #Loads the image
-x = makeArray(img)
+hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
+output1 = numpy.zeros((hn))#defines output array for the hidden layers
+step = 0
 
+for i in range(hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
 
-class Network:
+    weights = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the input layer
+    biases = 0#sets bias for each neuron
+    layer1 = Neuron(weights, biases)#defines layer1 as class neuron with the weights and biases defined previously
+    result = layer1.feedforward(x)#dot product of each pixel in the input and the random weights plus the bias
+    output1[step] = result#result added to output1 array(copied from your hsv method)
+    step = step + 1
+print(output1)#prints feedforward of each input once for each neuron in the hidden layer
 
-    def __init__(self):
-        weights = []
-        biases = []
-        for i in range(0,23521):# Creates the 23,520 weights we need and puts them into a list
-            weights[self.w.format(i)] = numpy.random.normal()
-        for j in range(0, 33):#Creates 32 biases. This is because we have 30 neurons in the hidden layer, and 2 output neurons
-            biases[self.b.format(j)] = numpy.random.normal()
+step = 0 #resets step
 
+for i in range(hn):
 
-    weights = numpy.random.rand(28,28)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the first layer
-    biases = numpy.zeros((28,28))#creates biases for each of the 784 neurons
+    weights = numpy.random.rand(28,)-.5 
+    biases = 0
+    layer2 = Neuron(weights, biases)
+    result = layer2.feedforward(output1)
+    output1[step] = result
+    step = step + 1
+print(output1)
 
-    layer1 = Neuron(weights, biases)
+fn = 2
+output = numpy.zeros((fn))
+step = 0
 
-    layer1.feedforward(x)
+for i in range(fn):
+
+    weights = numpy.random.rand(2,)-.5 
+    biases = 0
+    layer2 = Neuron(weights, biases)
+    result = layer2.feedforward(output)
+    output[step] = result
+    step = step + 1
+print(output)
