@@ -7,6 +7,7 @@ x = huearray#input
 
 hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
 output1 = numpy.zeros((hn))#defines output array for the hidden layers
+sumarray = numpy.zeros((hn))
 step = 0
 
 for i in range(hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
@@ -56,3 +57,6 @@ def train(self, data, results):
         for array, img_true in zip(data, results):
             #For every array and corresponding correct result we execute this loop
             #The zip function combines the data and the result into a pair
+            for i in range(0, 29):
+                for j in range(0, 785):
+                    sum[i] = 
