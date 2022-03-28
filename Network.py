@@ -5,6 +5,13 @@ from Neuron import Neuron
 #Major current problem
 #How do we put the data from pictures into the network, so that when we are intitializng the network
 #That data is the same as when we train the network.
+
+try:
+   x
+except NameError:
+   x = numpy.zeros((784))
+    
+
 hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
 output1 = numpy.zeros((hn))#defines output array for the hidden layers
 sumInput = numpy.zeros((hn))
