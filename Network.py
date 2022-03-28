@@ -44,3 +44,15 @@ for i in range(fn):
     output[step] = result
     step = step + 1
 print(output)
+
+def train(self, data, results):
+    #Data should be an array of HSV arrays
+    #This is what we are feeding into the network
+    #Results should be an array with corresponding 1's and 0's
+    #This would signify the correct result
+    epochs = 100 #This is the number of times we go through our pictures
+    learnin_pace = 0.1#This affects how drastically we change our weights and biases
+    for epoch in range(epochs):#Loops throught the number of epochs we have
+        for array, img_true in zip(data, results):
+            #For every array and corresponding correct result we execute this loop
+            #The zip function combines the data and the result into a pair
