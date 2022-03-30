@@ -1,6 +1,6 @@
 import numpy
 
-from Math import sigmoid
+from Math import derivative_sigmoid, sigmoid
 from Neuron import Neuron
 #Major current problem
 #How do we put the data from pictures into the network, so that when we are intitializng the network
@@ -14,16 +14,19 @@ except NameError:
 
 hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
 output1 = numpy.zeros((hn))#defines output array for the hidden layers
-sumInput = numpy.zeros((hn))
-sumHidden = numpy.zeros((hn))
-sumHidden2 =  numpy.zeros(2)
+sumHidden1 = numpy.zeros((hn))
+sumHidden2 = numpy.zeros((hn))
+sigsumHidden1 = numpy.zeros((hn))
+sigsumHidden2 = numpy.zeros((hn))
+sumOutput =  0
+sigsumOutput =  numpy.zeros(1)
 step = 0
 
 for i in range(hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
 
-    weightsInput = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the input layer
-    biasesInput = 0#sets bias for each neuron        
-    layer1 = Neuron(weightsInput, biasesInput)#defines layer1 as class neuron with the weights and biases defined previously
+    weightsHidden1 = numpy.random.rand(784)-.5 #sets a random weight between -.5 and .5 for each neuron/pixel in the input layer
+    biasesHidden1 = 0#sets bias for each neuron        
+    layer1 = Neuron(weightsHidden1, biasesHidden1)#defines layer1 as class neuron with the weights and biases defined previously
     result = layer1.feedforward(x)#dot product of each pixel in the input and the random weights plus the bias
     output1[step] = result#result added to output1 array(copied from your hsv method)
     step = step + 1
@@ -31,9 +34,9 @@ step = 0 #resets step
 
 for i in range(hn):
 
-        weightsHidden = numpy.random.rand(28,)-.5 
-        biasesHidden = 0
-        layer2 = Neuron(weightsHidden, biasesHidden)
+        weightsHidden2 = numpy.random.rand(28,)-.5 
+        biasesHidden2 = 0
+        layer2 = Neuron(weightsHidden2, biasesHidden2)
         result = layer2.feedforward(output1)
         output1[step] = result
         step = step + 1
@@ -44,9 +47,9 @@ step = 0
 
 for i in range(fn):
 
-    weightsHidden2 = numpy.random.rand(1,)-.5 
-    biasesHidden2 = 0
-    layer2 = Neuron(weightsHidden2, biasesHidden2)
+    weightsOutput = numpy.random.rand(1,)-.5 
+    biasesOutput = 0
+    layer2 = Neuron(weightsOutput, biasesOutput)
     result = layer2.feedforward(output)
     output[step] = result
     step = step + 1
@@ -58,6 +61,8 @@ def train(self, data, results):
     #This would signify the correct result
     epochs = 100 #This is the number of times we go through our pictures
     learnin_pace = 0.1#This affects how drastically we change our weights and biases
+    partial_weight_output = numpy.zeros(28)
+    partial_derv_input = numpy.zeros(784)
     for epoch in range(epochs):#Loops throught the number of epochs we have
         for array, img_true in zip(data, results):
             #For every array and corresponding correct result we execute this loop
@@ -68,30 +73,31 @@ def train(self, data, results):
 
             for i in range(0, 29):
                 for j in range(0, 785):
-                    sumInput[i] += weightsInput[j] * array[j]
-                sumInput[i] += biasesInput[i]
+                    sumHidden1[i] += weightsHidden1[j] * array[j]
+                sumHidden1[i] += biasesHidden1[i]
 
             for g in  range(0, 29):
-                sumInput[g] = sigmoid(sumInput[g])
+                sigsumHidden1[g] = sigmoid(sumHidden1[g])
             #Same as previous except for 2nd hidden layer
             for i in range(0, 29):
                 for j in range(0, 29):
-                    sumHidden[i] += weightsHidden[j] * array[j]
-                sumHidden[i] += biasesHidden[i]
+                    sumHidden2[i] += weightsHidden2[j] * sumHidden1[j]
+                sumHidden2[i] += biasesHidden2[i]
             for g in  range(0, 29):
-                sumHidden[g] = sigmoid(sumHidden[g])
+                sigsumHidden2[g] = sigmoid(sumHidden2[g])
             #Same as above except for the output layer
             for i in range(0, 29):
-                for j in range(0, 3):
-                    sumHidden2[i] += weightsHidden2[j] * array[j]
-                sumHidden2[i] += biasesHidden2[i]
+                sumOutput += weightsOutput[i] * sumHidden2
+                sumOutput += biasesOutput[i]
 
-            sumHidden2 = sigmoid(sumHidden2)
-            return(sumHidden2)
+            sigsumOutput = sigmoid(sumOutput)
             #Defining y_pred
-            #y_pred = sumHidden2
+            y_pred = sigsumOutput
             #Calculating partial derivative
-        # partial_y_pred = -2 * (results - y_pred)
+            partial_y_pred = -2 * (results - y_pred)
+
+            for i in range(0, 784):
+                partial_derv_input[i] = array[i] * derivative_sigmoid(sumHidden1)
 
 
 
