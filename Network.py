@@ -6,10 +6,7 @@ from Neuron import Neuron
 #How do we put the data from pictures into the network, so that when we are intitializng the network
 #That data is the same as when we train the network.
 
-try:
-   x
-except NameError:
-   x = numpy.zeros((784))
+x = numpy.zeros((784))
     
 
 hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
@@ -98,8 +95,6 @@ def train(self, data, results):
 
             for i in range(0, 784):
                 partial_derv_input[i] = array[i] * derivative_sigmoid(sumHidden1)
-
-
 
         
 
