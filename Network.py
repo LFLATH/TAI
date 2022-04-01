@@ -1,6 +1,6 @@
 import numpy
 
-from Math import derivative_sigmoid, sigmoid
+from Math import derivative_sigmoid, sigmoid, loss
 from Neuron import Neuron
 #Major current problem
 #How do we put the data from pictures into the network, so that when we are intitializng the network
@@ -41,6 +41,8 @@ class Network():
         self.biasesOutput = 0
         self.weightsOutput = numpy.zeros(28)
         self.biasesHidden2 = numpy.zeros(28)
+        self.hidden2_pred = numpy.zeros(28)
+        self.hidden1_pred = numpy.zeros(28)
         step = 0 #resets step
         for i in range(self.hn):# applies feedforward method from neuron class to each pixel once for each neuron in the hidden layer(numbers sent from the 784 pixels to the hidden neurons)
 
@@ -83,6 +85,7 @@ class Network():
                 #Loops through all th connections to the first hidden layer from the input neurons
                 #Takes the sum of these connections times the weight
                 #Takes the sigmoid of these sums
+            
 
                 for i in range(0, 28):
                     for j in range(0, 784):
@@ -107,7 +110,7 @@ class Network():
                 #Defining y_pred
                 y_pred = sigsumOutput
                 #Calculating partial derivative
-                #partial_y_pred = -2 * (results - y_pred)
+                partial_y_pred = -2 * (results - y_pred)
                 step = 0
                 for i in range(0, 28):
                     for j in range(0, 784):
@@ -118,11 +121,43 @@ class Network():
                 for i in range(0,28):
                     for j in range(0,28):
                         self.partial_derv_hidden[j + step] = self.sumHidden1[i] * derivative_sigmoid(self.sumHidden2[i])
+                        self.hidden1_pred[i] = self.weightsHidden1[i] * derivative_sigmoid(self.sumHidden2[i])
+
                     step += 28
                     self.partial_derv_hidden_bias[i] = derivative_sigmoid(self.sumHidden2[i])
                 for i in range(0,28):
                     self.partial_derv_output = self.sumHidden2[i] * derivative_sigmoid(self.sumOutput)
+                    self.hidden2_pred[i] = self.weightsHidden2[i] * derivative_sigmoid(self.sumOutput)
                 self.partial_derv_output_bias = derivative_sigmoid(self.sumOutput)
+
+                step = 0
+
+                #First Layer
+                for i in range(0,28):
+                    for j in range(0,784):
+                        self.weightsHidden1[j + step] -= self.learning_pace * partial_y_pred * self.hidden1_pred[i] * self.partial_derv_input[j + step]
+                    self.biasesHidden1 -= self.learning_pace * partial_y_pred * self.hidden1_pred[i] * self.partial_derv_input_bias[i]
+                    step += 784
+
+                #Second Layer
+                step = 0
+                for i in range(0, 28):
+                    for j in range(0, 28):
+                        self.weightsHidden2[j + step] -= self.learning_pace * partial_y_pred * self.hidden2_pred[i] * self.partial_derv_hidden[j + step]
+                    self.biasesHidden2[i] -= self.learning_pace * partial_y_pred * self.hidden2_pred[i] * self.partial_derv_hidden_bias[i]
+                    step += 28
+                
+                #Output Layer
+                for i in range(0, 28):
+                    self.weightsOutput[i] -= self.learning_pace * partial_y_pred * self.partial_derv_output[i]
+                self.biasesOutput -= self.learning_pace * partial_y_pred * self.partial_derv_output_bias
+            if epoch % 10 == 0:
+                y_pred = numpy.apply_along_axis(self.feedforward, 1, data)
+                loss = loss(results,y_pred)
+                print("Epoch %d loss: %.3f" % (epoch, loss))
+
+
+
 
 
                 
