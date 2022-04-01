@@ -19,7 +19,7 @@ network = Network()
 
 print(network.train(imgarray, results))
 '''
-pred = [0,0,1]
-act = [0,1,0]
+pred = numpy.array([0,0,1])
+act = numpy.array([0,1,0])
 print(loss(act,pred))
 
