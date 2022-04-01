@@ -34,3 +34,4 @@ def convertHue(data):
             v = Cmax
             huearray[step] = h
             step = step + 1
+    return huearray
