@@ -64,15 +64,12 @@ class activation(layer):
 
 
 
-input = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 1, 2))
-true = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
+#input = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 1, 2))
+#true = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
 
-true = [0, 1, 1, 0]
 
-pred = [.1,.6,.9, .4]
-
-mse(true, pred)
-
+input = np.array([2, 4, 6, 8])
+true = np.array([4, 16, 36, 64])
 
 network = [
     connected(2, 3),
@@ -87,15 +84,15 @@ rate = .1
 
 for i in range(epochs):
     error = 0
-    for x, y in zip(input, true):
-        input = x
+    for j in range(len(input)):
+        x = input[j]
         for layer in network:
             
-            output = layer.forward(output)
+            output = layer.forward(input)
 
-            error += mse(true, output)
+            error += mse(true, input)
 
-            gd = dmse(true, output)
+            gd = dmse(true, input)
             for layer in reversed(network):
                 gd = layer.backward(gd, rate)
 
