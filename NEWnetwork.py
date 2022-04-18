@@ -67,8 +67,9 @@ class activation(layer):
 input = np.reshape([[0, 0], [0, 1], [1, 0], [1, 1]], (4, 1, 2))
 true = np.reshape([[0], [1], [1], [0]], (4, 1, 1))
 
-true = int([0, 1, 1, 0])
-pred = int([.1,.6,.9, .4])
+true = [0, 1, 1, 0]
+
+pred = [.1,.6,.9, .4]
 
 mse(true, pred)
 
