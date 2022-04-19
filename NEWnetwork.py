@@ -29,7 +29,7 @@ class layer:
         self.output = None
     def forward(self, input):
         pass
-    def backward(self, output_gradient, learning_rate):
+    def backward(self, output_gradient, rate):
         pass
 
 class connected(layer):
@@ -46,7 +46,7 @@ class connected(layer):
     def backward(self, yerror, rate):
         weights_error = np.dot(yerror, self.input.T)
         self.weights -= rate * weights_error
-        self.bias -= rate * yerror
+        self.biases -= rate * yerror
         return np.dot(self.weights.T, yerror)
 
 class activation(layer):
@@ -72,10 +72,10 @@ input = np.array([2, 4, 6, 8])
 true = np.array([4, 16, 36, 64])
 
 network = [
-    connected(2, 3),
+    connected(4, 4),
     activation(),
 
-    connected(3, 1),
+    connected(4, 1),
     activation()
 ]
 
@@ -98,3 +98,6 @@ for i in range(epochs):
 
     error /= len(input)
     print('%d/%d, error=%d' % (i + 1, epochs, error))
+
+gd = dmse(true, input)
+layer.backward(gd, rate)
