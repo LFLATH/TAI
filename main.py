@@ -13,23 +13,24 @@ for images in os.listdir(img_folder):#Loops through these images
     format_Image(img)#Formats the Images
 
 results= numpy.array([1, 1])
+'''
 img1 = Image.open('Test_Images/t1.jpg') #Loads the image
 img1 = convertHue(img1)
 img2 = Image.open('Test_Images/t2.jpg') #Loads the image
 img2 = convertHue(img2)
 imgarray = numpy.array([img1, img2])
-network = Network()
+print(np.shape(img1))
+print(np.shape(img2))
+
 '''
-
-
 
 X = np.array([1, 2, 3, 4, 50, 60, 70])
 Y = np.array([1, 1, 1, 1, 0, 0, 0])
 
 network = [
-    Dense(1, 3),
+    Dense(784, 10), Changed to 784 since 784 hsv values, changed to 10 because 10 nodes in the first layer
     Hypertan(),
-    Dense(3, 1),
+    Dense(10, 1), Changed to w10 because 10 input nodes, output to 1 output node 
     Hypertan()
 ]
 
@@ -41,3 +42,4 @@ for x in X:
         print("Greater than 10")
     else:
         print("Less than 10")
+'''
