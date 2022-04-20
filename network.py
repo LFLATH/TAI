@@ -1,7 +1,7 @@
 def predict(network, input):
     output = input
     for layer in network:
-        output = layer.forward(output)
+        output = layer.forwardfeed(output)
     return output
 
 def train(network, loss, loss_p, x_train, y_train, epochs = 1000, learning_pace = 0.01):
@@ -16,9 +16,8 @@ def train(network, loss, loss_p, x_train, y_train, epochs = 1000, learning_pace 
             grad = loss_p(y, output)
 
             for layer in reversed(network):
-                grad = layer.backward(grad, learning_pace)
+                grad = layer.backwardprop(grad, learning_pace)
 
         error /= len(x_train)
 
         print(f"{epoch + 1}/{epochs}, error={error}")
-        

@@ -1,14 +1,17 @@
 import os#Allows us to access pictures and files with Python
-from Network import *
 from HSVConverter import convertHue
-from Math import loss
 from ImageFormatter import *#Import the method from ImageFormatter
+import numpy as np
+from dense import Dense
+from tan import Hypertan
+from mse import mse, mse_p
+from network import train, predict
 '''
 img_folder = 'Test_Images'#Defines the folder with the test images
 for images in os.listdir(img_folder):#Loops through these images
     img = Image.open("Test_Images/"+images)#Opens the Images
     format_Image(img)#Formats the Images
-'''
+
 results= numpy.array([1, 1])
 img1 = Image.open('Test_Images/t1.jpg') #Loads the image
 img1 = convertHue(img1)
@@ -16,5 +19,25 @@ img2 = Image.open('Test_Images/t2.jpg') #Loads the image
 img2 = convertHue(img2)
 imgarray = numpy.array([img1, img2])
 network = Network()
+'''
 
-print(network.train(imgarray, results))
+
+
+X = np.array([1, 2, 3, 4, 50, 60, 70])
+Y = np.array([1, 1, 1, 1, 0, 0, 0])
+
+network = [
+    Dense(1, 3),
+    Hypertan(),
+    Dense(3, 1),
+    Hypertan()
+]
+
+# train
+train(network, mse, mse_p, X, Y, epochs=10000, learning_pace=0.1)
+for x in X:
+    pred_num = predict(network, x)
+    if pred_num < 0.5:
+        print("Greater than 10")
+    else:
+        print("Less than 10")
