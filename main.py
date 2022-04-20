@@ -18,4 +18,3 @@ imgarray = numpy.array([img1, img2])
 network = Network()
 
 print(network.train(imgarray, results))
-
