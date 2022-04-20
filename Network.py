@@ -11,7 +11,6 @@ from Neuron import Neuron
 class Network():
        
     def  __init__(self):
-        self.t = 5
         self.x = numpy.zeros((784))
         self.hn = 28 # defines number of Hidden Neurons in the first and second hidden layers
         self.output1 = numpy.zeros((self.hn))#defines output array for the hidden layers
@@ -77,7 +76,6 @@ class Network():
             step = step + 1
 
     def train(self, data, results):
-        print(self.t)
         for epoch in range(self.epochs):#Loops throught the number of epochs we have
             for array, img_true in zip(data, results):
                 #For every array and corresponding correct result we execute this loop
@@ -110,7 +108,7 @@ class Network():
                 #Defining y_pred
                 y_pred = sigsumOutput
                 #Calculating partial derivative
-                partial_y_pred = -2 * (results - y_pred)
+                partial_y_pred = -2 * (img_true - y_pred)
                 step = 0
                 for i in range(0, 28):
                     for j in range(0, 784):
