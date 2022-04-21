@@ -8,15 +8,14 @@ def train(network, loss, loss_p, x_train, y_train, epochs = 1000, learning_pace 
     for epoch in range(epochs):
         error = 0
         for x, y in zip(x_train, y_train):
+            for x_sub in x:
+                output = predict(network, x_sub)
 
-            output = predict(network, x)
+                error += loss(y, output)
 
-            error += loss(y, output)
-
-            grad = loss_p(y, output)
-
-            for layer in reversed(network):
-                grad = layer.backwardprop(grad, learning_pace)
+                grad = loss_p(y, output)
+                for layer in reversed(network):
+                    grad = layer.backwardprop(grad, learning_pace)
 
         error /= len(x_train)
 
