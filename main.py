@@ -35,4 +35,4 @@ network = [
 ]
 
 # train
-train(network, mse, mse_p, X, Y, epochs=10000, learning_pace=0.1)
+train(network, mse, mse_p, X, Y, epochs=10, learning_pace=.001)#slowly decreasing this number seems to decrease mse well, maybe also casue treating the imgarray as a new mini batch #nvm
