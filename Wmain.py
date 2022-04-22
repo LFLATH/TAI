@@ -5,7 +5,7 @@ import numpy as np
 from numpy import genfromtxt
 from dense import Dense
 from tan import Hypertan
-from mse import mse, mse_p
+from mse import mse, mse_p, rmse, drmse
 from network import train, predict
 
 X = np.genfromtxt("C:/Users/Sweet/source/repos/Weather/data/1722.csv", int, delimiter=',', skip_header=1)
@@ -22,7 +22,7 @@ network = [
 ]
 
 
-train(network, rmse, drmse, X, Y, epochs=100000, learning_pace=.1)#slowly decreasing this number seems to decrease mse well, maybe casue it is treating the imgarray as a new mini batch #nvm
+train(network, rmse, drmse, X, Y, epochs=100000, learning_pace=.001)#slowly decreasing this number seems to decrease mse well, maybe casue it is treating the imgarray as a new mini batch #nvm
 
 
 '''
