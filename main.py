@@ -25,6 +25,17 @@ for img in imgarray:
     img = img.T
 X = imgarray
 Y = np.array([0, 1])
+<<<<<<< HEAD
+=======
+
+import tensorflow as tf
+import tensorflow_datasets as tfds
+
+# Construct a tf.data.Dataset
+ds = tfds.load('mnist', split='train', shuffle_files=True)
+
+
+>>>>>>> 58ee428259f39f44a0e6f3cdacf5bf11fc3ed5f9
 network = [
     Dense(784, 10), #Turned 1,10 into 784, 10
     Hypertan(),
