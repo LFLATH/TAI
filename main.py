@@ -25,8 +25,6 @@ for img in imgarray:
     img = img.T
 X = imgarray
 Y = np.array([0, 1])
-<<<<<<< HEAD
-=======
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -35,7 +33,6 @@ import tensorflow_datasets as tfds
 ds = tfds.load('mnist', split='train', shuffle_files=True)
 
 
->>>>>>> 58ee428259f39f44a0e6f3cdacf5bf11fc3ed5f9
 network = [
     Dense(784, 10), #Turned 1,10 into 784, 10
     Hypertan(),
@@ -46,5 +43,3 @@ network = [
 # train
 train(network, mse, mse_p, X, Y, epochs=1, learning_pace=.0001)#slowly decreasing this number seems to decrease mse well, maybe also casue treating the imgarray as a new mini batch #nvm
 
-for img in imgarray:
-    predict(network, img)
