@@ -28,7 +28,6 @@ Y = np.array([0, 1])
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-
 # Construct a tf.data.Dataset
 ds = tfds.load('mnist', split='train', shuffle_files=True)
 
