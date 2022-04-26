@@ -1,3 +1,6 @@
+#windows: .\env\scripts\activate
+
+
 import os#Allows us to access pictures and files with Python
 from HSVConverter import convertHue
 from ImageFormatter import *#Import the method from ImageFormatter
@@ -25,11 +28,6 @@ for img in imgarray:
     img = img.T
 X = imgarray
 Y = np.array([0, 1])
-
-import tensorflow as tf
-import tensorflow_datasets as tfds
-# Construct a tf.data.Dataset
-ds = tfds.load('mnist', split='train', shuffle_files=True)
 
 
 network = [

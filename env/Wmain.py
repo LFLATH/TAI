@@ -7,12 +7,17 @@ from dense import Dense
 from tan import Hypertan
 from mse import mse, mse_p, rmse, drmse
 from network import train, predict
+import tensorflow as tf
+import tensorflow_datasets as tfds
 
+data = tfds.load('mnist', split='train', shuffle_files=True)
+
+'''
 X = np.genfromtxt("C:/Users/Sweet/source/repos/Weather/data/1722.csv", int, delimiter=',', skip_header=1)
 Y = np.genfromtxt("C:/Users/Sweet/source/repos/Weather/data/1722.csv", int, delimiter=',', skip_header=2)
 X = X[0:100]
 Y = Y[0:100]
-
+'''
 
 network = [
     Dense(3, 3),
