@@ -22,6 +22,7 @@ network = [
     Hypertan(),
 ]
 
+
 train(network, rmse, drmse, X, Y, epochs=100000, learning_pace=.001)#slowly decreasing this number seems to decrease mse well, maybe casue it is treating the imgarray as a new mini batch #nvm
 
 '''
