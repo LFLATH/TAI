@@ -1,13 +1,11 @@
 #windows: .\env\scripts\activate
-
-
 import os#Allows us to access pictures and files with Python
 from HSVConverter import convertHue
 from ImageFormatter import *#Import the method from ImageFormatter
 import numpy as np
 from dense import Dense
 from tan import Hypertan
-from mse import mse, mse_p
+from loss import mse, mse_p
 from network import train, predict
 '''
 img_folder = 'Test_Images'#Defines the folder with the test images
