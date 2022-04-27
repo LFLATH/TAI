@@ -15,6 +15,7 @@ X = X[0:100]
 Y = Y[0:100]
 '''
 
+
 network = [
     Dense(3, 3),
     Hypertan(),
