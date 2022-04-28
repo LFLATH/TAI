@@ -14,3 +14,18 @@ class Dense(Layer):
         self.weights = self.weights - (learning_pace * weights_grad)
         self.bias = self.bias - (learning_pace * output_grad)
         return input_grad
+
+
+
+'''
+if weights is None:
+            self.weights = np.random.randn(output_dim, input_dim)-.5
+        else:
+            self.weights = weights
+
+        if biases is None:
+            self.biases = np.random.randn(output_dim, 1)
+        else:
+            self.biases = biases 
+        return self.weights, self.biases
+'''

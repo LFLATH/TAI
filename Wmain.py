@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 X = np.reshape(data, (150, 4, 1))
 Y = np.reshape(true, (150, 1, 1))
 
+
 network = [
     Dense(4, 4),
     Hypertan(),
@@ -40,8 +41,6 @@ l = Dense(4, 4)
 
 l.forwardfeed(x)
 
-'''
-
 
 train(network, mse, dmse, X, Y, epochs=1000, learning_pace=.001)#decreasing learning rate gradually decreases error
 
@@ -58,20 +57,11 @@ for guess in guesses:
     }
     print(min(guesser, key=guesser.get))
 # attempting to decrease learning rate gradually
-'''
+
 i = .01
-for i in range(100):
+for i in range(10):
     i = i/5
-    for j in range(100):
+    for j in range(10):
         train(network, mse, dmse, X, Y, epochs=100, learning_pace=i)
         i = i*2
 '''
-
-'''
-
-for layer in network:
-        o = layer.forwardfeed(x)
-        #print(o)
-
-'''
-
