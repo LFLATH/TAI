@@ -5,6 +5,8 @@ from tan import Hypertan
 from loss import mse, dmse, rmse, drmse
 from network import train, predict
 from data import data, true
+import matplotlib.pyplot as plt
+
 
 X = np.reshape(data, (150, 4, 1))
 Y = np.reshape(true, (150, 1, 1))
@@ -24,15 +26,40 @@ network = [
     Hypertan(),
 ]
 
+<<<<<<< HEAD
 
 train(network, mse, dmse, X, Y, epochs=10000, learning_pace=.001)
 
 print(predict(network, X[5]))
 print(predict(network, X[105]))
 
+=======
+'''
+x = X[4]
+y= Y[4]
+
+l = Dense(4, 4)
+
+l.forwardfeed(x)
+
+'''
 
 
+train(network, mse, dmse, X, Y, epochs=1000, learning_pace=.001)#decreasing learning rate gradually decreases error
+>>>>>>> 873a6161864b4e8ab9fd03752dde15087a28f8de
 
+
+guesses = []
+guesses.append(predict(network, X[0]))
+guesses.append(predict(network, X[100]))
+
+for guess in guesses:
+    guesser = {
+        "Species 3": abs(1 - guess),
+        "Species 2": abs(0.666 - guess),
+        "Species 1": abs(0.333- guess)
+    }
+    print(min(guesser, key=guesser.get))
 # attempting to decrease learning rate gradually
 '''
 i = .01
@@ -43,3 +70,14 @@ for i in range(100):
         i = i*2
 '''
 
+<<<<<<< HEAD
+=======
+'''
+
+for layer in network:
+        o = layer.forwardfeed(x)
+        #print(o)
+
+'''
+
+>>>>>>> 873a6161864b4e8ab9fd03752dde15087a28f8de
