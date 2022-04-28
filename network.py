@@ -20,3 +20,4 @@ def train(network, loss, loss_p, x_train, y_train, epochs = 1000, learning_pace 
         error /= len(x_train)
 
         print(f"{epoch + 1}/{epochs}, error={error}")
+    
