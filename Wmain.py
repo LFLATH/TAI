@@ -26,14 +26,12 @@ network = [
     Hypertan(),
 ]
 
-<<<<<<< HEAD
 
 train(network, mse, dmse, X, Y, epochs=10000, learning_pace=.001)
 
 print(predict(network, X[5]))
 print(predict(network, X[105]))
 
-=======
 '''
 x = X[4]
 y= Y[4]
@@ -46,7 +44,6 @@ l.forwardfeed(x)
 
 
 train(network, mse, dmse, X, Y, epochs=1000, learning_pace=.001)#decreasing learning rate gradually decreases error
->>>>>>> 873a6161864b4e8ab9fd03752dde15087a28f8de
 
 
 guesses = []
@@ -70,8 +67,6 @@ for i in range(100):
         i = i*2
 '''
 
-<<<<<<< HEAD
-=======
 '''
 
 for layer in network:
@@ -80,4 +75,3 @@ for layer in network:
 
 '''
 
->>>>>>> 873a6161864b4e8ab9fd03752dde15087a28f8de
