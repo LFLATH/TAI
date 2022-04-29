@@ -4,7 +4,7 @@ from Network_Files.dense import Dense
 from Network_Files.tan import Hypertan
 from Network_Files.loss import mse, dmse, rmse, drmse
 from Network_Files.network import train, predict
-from data import data, true
+from Irisdata import data, true
 import matplotlib.pyplot as plt
 
 

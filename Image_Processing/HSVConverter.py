@@ -1,6 +1,7 @@
 from Image_Processing.ImageFormatter import *
 from numpy import asarray
 from matplotlib import pyplot as plt
+
 def convertHue(data):
     data = format_Image(data)
     data = asarray(data)#Makes image into an array of rgb values
