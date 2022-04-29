@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 
 
 X = np.reshape(data, (150, 4, 1))
+X[5].shape
 Y = np.reshape(true, (150, 1, 1))
 
 
