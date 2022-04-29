@@ -1,4 +1,4 @@
-from ImageFormatter import *
+from Image_Processing.ImageFormatter import *
 from numpy import asarray
 from matplotlib import pyplot as plt
 def convertHue(data):

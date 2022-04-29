@@ -1,6 +1,6 @@
 import numpy as np
-from layer import Layer
-from activation import Activation
+from Network_Files.layer import Layer
+from Network_Files.activation import Activation
 
 class Hypertan(Activation):
     def __init__(self):

@@ -1,5 +1,5 @@
 import numpy as np
-from layer import Layer
+from Network_Files.layer import Layer
 
 class Dense(Layer):
     def __init__(self, input_dim, output_dim):
