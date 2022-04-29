@@ -28,7 +28,7 @@ network = [
 ]
 
 
-train(network, mse, dmse, X, Y, epochs=10000, learning_pace=.001)
+train(network, mse, dmse, X, Y, epochs=1000, learning_pace=.001)
 
 print(predict(network, X[5]))
 print(predict(network, X[105]))
