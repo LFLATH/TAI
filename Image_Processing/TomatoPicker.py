@@ -6,15 +6,15 @@ import pandas as pd
 #x = input("Enter file path:")
 #y = input("Sort by 'area', 'x', 'y', 'R':")
 #z = input("Name of csv:")
-os.chdir("C:/Users/Sweet/Desktop/tomatoe/done/21S87,91,92,95/21S87")
-img = cv2.imread("C:/users/Sweet/Desktop/tomatoe/done/21S87,91,92,95/21S87/21S87-09.jpg", 1)
+os.chdir("C:/Users/Sweet/Desktop/tomatoe/done/Lei")
+img = cv2.imread("C:/users/Sweet/Desktop/tomatoe/done/Lei/21S1500022.jpg", 1)
 D = np.zeros(8)
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 mask = cv2.inRange(hsv, (0,0,85), (50,255,255))
 res = cv2.bitwise_and(img,img, mask= mask)
 contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 #contours=cv2.drawContours(res, contours, -1, (0,255,0), 3)
-step = 54
+step = 78
 for n in contours:
     filename = "t" + str(step) + ".jpg"
     if cv2.contourArea(n) >30000:
