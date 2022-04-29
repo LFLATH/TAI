@@ -1,9 +1,9 @@
 import os#Allows us to access pictures and files with Python
 import numpy as np
-from dense import Dense
-from tan import Hypertan
-from loss import mse, dmse, rmse, drmse
-from network import train, predict
+from Network_Files.dense import Dense
+from Network_Files.tan import Hypertan
+from Network_Files.loss import mse, dmse, rmse, drmse
+from Network_Files.network import train, predict
 from data import data, true
 import matplotlib.pyplot as plt
 

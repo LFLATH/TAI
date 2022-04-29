@@ -1,5 +1,5 @@
 import numpy as np
-from layer import Layer
+from Network_Files.layer import Layer
 
 class Activation(Layer):
     def __init__(self, acti, acti_p):
