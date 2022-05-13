@@ -9,13 +9,10 @@ from Network_Files.loss import mse, dmse
 from Network_Files.network import train, predict
 from Tdata import *
 
-X = numpy.reshape(imgarray, (81, 784, 1))
-Y = numpy.reshape(true, (81,1,1))
-
 network = [
-    Dense(784, 10),
+    Dense(784, 30),
     Hypertan(),
-    Dense(10, 10),
+    Dense(30, 10),
     Hypertan(),
     Dense(10, 10),
     Hypertan(),
@@ -26,8 +23,20 @@ network = [
     Dense(10, 10),
     Hypertan(),
     Dense(10, 1),
-    Hypertan()
+    Hypertan(),
 ]
 
 # train
-train(network, mse, dmse, X, Y, epochs=5000, learning_pace=.001)#slowly decreasing this number seems to decrease mse well, maybe also casue treating the imgarray as a new mini batch #nvm
+train(network, mse, dmse, X, Y, epochs=1000, learning_pace=.001)#slowly decreasing this number seems to decrease mse well, maybe also casue treating the imgarray as a new mini batch #nvm
+
+
+#test
+test  = Image.open("Test_Images/it2.jpg")
+img = format_Image(test)
+a = convertHue(img)
+t = np.reshape(a, (784, 1))
+
+input = t
+for layer in network:
+    input = layer.forwardfeed(input)
+print(input)
